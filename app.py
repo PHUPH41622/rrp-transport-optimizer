@@ -83,7 +83,7 @@ def solve_tsp_nearest_neighbor(nodes, df, start_node=None):
 
 # --- 3. UI Layout ---
 st.title("🚛 RRP Routing")
-st.markdown("Select locations to visit. The route will **always start and end at C00**.")
+st.markdown("Select locations to visit. The route will optimized by **Nearest Neighbor algorithm**.")
 
 if not df.empty:
     st.header("📍 Configuration")
