@@ -86,30 +86,26 @@ st.title("🚛 RRP Routing")
 st.markdown("Select locations to visit. The route will **always start and end at C00**.")
 
 if not df.empty:
-    with st.sidebar:
-        st.header("📍 Configuration")
-        
-        available_nodes = df.index.tolist()
-        
-        # Multiselect for choosing locations (exclude C00 from selection as it's mandatory)
-        # We allow selecting C00 but we will ensure it's handled correctly, or better:
-        # Show C00 as fixed and let user select OTHERS.
-        
-        selectable_nodes = [n for n in available_nodes if n != 'C00']
-        
-        selected_nodes_user = st.multiselect(
-            "Select Locations to Visit (C00 is included by default):",
-            options=selectable_nodes,
-            default=selectable_nodes[:5] if len(selectable_nodes) >= 5 else [],
-            help="Choose the nodes you want to include in the route."
-        )
-        
-        # Combine C00 with user selection
-        selected_nodes = ['C00'] + selected_nodes_user
-        
-        st.info("ℹ️ Route always starts and ends at **C00**.")
+    st.header("📍 Configuration")
+    
+    available_nodes = df.index.tolist()
+    
+    # Multiselect for choosing locations (exclude C00 from selection as it's mandatory)
+    selectable_nodes = [n for n in available_nodes if n != 'C00']
+    
+    selected_nodes_user = st.multiselect(
+        "Select Locations to Visit (C00 is included by default):",
+        options=selectable_nodes,
+        default=selectable_nodes[:5] if len(selectable_nodes) >= 5 else [],
+        help="Choose the nodes you want to include in the route."
+    )
+    
+    # Combine C00 with user selection
+    selected_nodes = ['C00'] + selected_nodes_user
+    
+    st.info("ℹ️ Route always starts and ends at **C00**.")
 
-        calculate_btn = st.button("🚀 Calculate Best Route", type="primary")
+    calculate_btn = st.button("🚀 Calculate Best Route", type="primary")
 
     # Main Area
     if calculate_btn:
