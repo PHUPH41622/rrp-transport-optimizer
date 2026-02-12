@@ -96,7 +96,7 @@ if not df.empty:
     selected_nodes_user = st.multiselect(
         "Select Locations to Visit (C00 is included by default):",
         options=selectable_nodes,
-        default=selectable_nodes[:5] if len(selectable_nodes) >= 5 else [],
+        default=[],
         help="Choose the nodes you want to include in the route."
     )
     
